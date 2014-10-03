@@ -1,0 +1,34 @@
+{
+  "name": "borschik-tech-postcss",
+  "version": "0.1.0",
+  "description": "borschik tech that expands css imports, minifies styles, freezes linked resources. Source map can be generated for output file.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/scf2k/borschik-tech-postcss.git"
+  },
+  "keywords": [
+    "borschik",
+    "tech",
+    "css",
+    "sourcemap"
+  ],
+  "author": "Vladimir Alaev <scf2k@yandex.ru>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/scf2k/borschik-tech-postcss/issues"
+  },
+  "homepage": "https://github.com/scf2k/borschik-tech-postcss",
+  "dependencies": {
+    "postcss": "^2.2.5",
+    "csswring": "^1.3.0",
+    "postcss-import": "^1.0.2",
+    "reduce-function-call": "^1.0.1"
+  },
+  "peerDependencies": {
+    "borschik": "^1.1.0"
+  }
+}
