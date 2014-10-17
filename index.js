@@ -90,13 +90,15 @@ function comments() {
  */
 function links(opts) {
     return function(styles, processOpts) {
+
+        var from = processOpts.from ? PATH.dirname(processOpts.from) : '.',
+            to = processOpts.to ? PATH.dirname(processOpts.to) : from;
+
         styles.eachDecl(function(decl) {
             if (!decl.value) {
                 return;
             }
 
-            var from = processOpts.from ? PATH.dirname(processOpts.from) : '.',
-                to = processOpts.to ? PATH.dirname(processOpts.to) : from;
 
             if (decl.value.indexOf('url(') == -1) {
                 return;
@@ -107,21 +109,24 @@ function links(opts) {
                 // value can be within quotes, double quotes or nothing
                 // parts will capture optional opening quote, value and optional closing quote
                 var parts = value.match(/^(['"]?)([^'"]*)(['"]?)$/),
-                    newPath = parts[2];
+                    newPath = parts[2],
+                    quotes = parts[1];
 
                 if (!RE_INLINED_CONTENT.test(newPath) && !RE_PROTO_URL.test(newPath)) {
-                    if (dir !== from) {
-                        newPath = PATH.relative(from, dir + PATH.sep + newPath);
-                    }
-                    newPath = PATH.resolve(from, newPath);
-                    newPath = PATH.relative(to, newPath);
-
+                    newPath = PATH.resolve(dir, newPath);
+                    newPath = PATH.relative(from, newPath);
+                    newPath = PATH.resolve(to, newPath);
                     if (opts.freeze) {
                         newPath = freeze(newPath);
                     }
+                    if (!RE_INLINED_CONTENT.test(newPath)) {
+                        newPath = PATH.relative(to, newPath);
+                    } else {
+                        quotes = quotes || '"';
+                    }
                 }
 
-                return 'url(' + parts[1] + newPath + parts[3] + ')';
+                return 'url(' + quotes + newPath + quotes + ')';
             });
         });
     }
@@ -133,7 +138,7 @@ function freeze(path) {
 
     if (FREEZE.isFreezableUrl(url)) {
         try {
-            return FREEZE.processPath(url) + parts[2];
+            url = FREEZE.processPath(url);
         } catch (e) {
             // Find all parents for better error message
             var message = [e.message],
@@ -146,5 +151,5 @@ function freeze(path) {
         }
     }
 
-    return path;
+    return url + parts[2];
 }
