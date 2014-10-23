@@ -21,8 +21,11 @@ exports.Tech = base.Tech.inherit({
 
     __constructor: function(opts) {
         this.__base(opts);
-        if (opts.techOptions.sourceMap === true) {
-            this.sourceMap = true;
+        this.sourceMap = true;
+        if (opts.techOptions.sourceMap !== undefined) {
+            this.sourceMap = opts.techOptions.sourceMap;
+        }
+        if (this.sourceMap === true) {
             if (!opts.output.path || opts.techOptions.inlineMap === true) {
                 this.sourceMap = {inline: true};
             }
