@@ -111,7 +111,7 @@ function links(opts) {
             decl.value = reduceFunctionCall(decl.value, 'url', function(value) {
                 // value can be within quotes, double quotes or nothing
                 // parts will capture optional opening quote, value and optional closing quote
-                var parts = value.match(/^(['"]?)([^'"]*)(['"]?)$/),
+                var parts = value.match(/^(['"]?)(.*)(\1)$/),
                     newPath = parts[2],
                     quotes = parts[1];
 
