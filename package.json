@@ -1,6 +1,6 @@
 {
   "name": "borschik-tech-postcss",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "borschik tech that expands css imports, minifies styles, freezes linked resources. Source map can be generated for output file.",
   "main": "index.js",
   "scripts": {
