@@ -20,7 +20,7 @@ First you should install `borschik` and this module into your project and save i
 
 Then you could run `borschik`
 
-    ./node_modules/.bin/borschik --tech postcss -i your.css --o your.min.css
+    ./node_modules/.bin/borschik --tech postcss -i your.css -o your.min.css
     
 Source map generation is enabled by default. In the case above it will be written to your.min.css.map.
 When output is a stream (stdout) the source map will be embedded into css content as a comment pragma.
@@ -34,13 +34,13 @@ For example:
 You can disable source map generation using `sourceMap` tech option. For example:
 
 ```
-./node_modules/.bin/borschik --tech istanbul -i your.css -o your.min.css --tech-options '{"sourceMap": false}'
+./node_modules/.bin/borschik --tech postcss -i your.css -o your.min.css --tech-options '{"sourceMap": false}'
 ```
 
 You can force to embed source map into file by specifying the `inlineMap` tech option. For example:
 
 ```
-./node_modules/.bin/borschik --tech istanbul -i your.css -o your.min.css --tech-options '{"inlineMap": true}'
+./node_modules/.bin/borschik --tech postcss -i your.css -o your.min.css --tech-options '{"inlineMap": true}'
 ```
 
 
